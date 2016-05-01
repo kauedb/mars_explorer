@@ -1,6 +1,5 @@
 package br.com.kauedb.mars_explorer.domain;
 
-import mockit.Injectable;
 import mockit.Tested;
 import org.junit.Test;
 
@@ -15,10 +14,6 @@ public class ProbeMoveTest {
 
     @Tested
     private Probe probe;
-
-    @Injectable
-    private Position initialPosition;
-
 
     @Test
     public void shouldMoveNorthHeadingNorth() {
