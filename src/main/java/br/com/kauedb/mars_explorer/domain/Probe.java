@@ -11,7 +11,8 @@ public class Probe {
     }
 
     public void move(Movement movement) {
-        position = new Position(0, 1, CardinalDirection.NORTH);
+
+        position = Position.builder().x(0).y(1).direction(CardinalDirection.NORTH).build();
     }
 
     public Position getPosition() {

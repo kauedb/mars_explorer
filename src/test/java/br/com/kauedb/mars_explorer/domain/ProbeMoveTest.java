@@ -26,7 +26,7 @@ public class ProbeMoveTest {
         setField(probe, "position", initialPosition);
 
         probe.move(Movement.MOVE);
-        assertThat(probe.getPosition(), is(Position.builder().x(0).y(0).direction(CardinalDirection.NORTH).build()));
+        assertThat(probe.getPosition(), is(Position.builder().x(0).y(1).direction(CardinalDirection.NORTH).build()));
     }
 
 }

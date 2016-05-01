@@ -14,5 +14,4 @@ public class Position {
     Integer y;
     Direction direction;
 
-
 }
