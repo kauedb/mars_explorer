@@ -22,11 +22,11 @@ public class ProbeMoveTest {
 
     @Test
     public void shouldMoveNorthHeadingNorth() {
-        final Position initialPosition = new Position(0, 0, CardinalDirection.NORTH);
+        final Position initialPosition = Position.builder().x(0).y(0).direction(CardinalDirection.NORTH).build();
         setField(probe, "position", initialPosition);
 
         probe.move(Movement.MOVE);
-        assertThat(probe.getPosition(), is(new Position(0, 1, CardinalDirection.NORTH)));
+        assertThat(probe.getPosition(), is(Position.builder().x(0).y(0).direction(CardinalDirection.NORTH).build()));
     }
 
 }
