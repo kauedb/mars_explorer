@@ -13,13 +13,22 @@ import lombok.extern.java.Log;
 public class Probe {
     static Position LOWER_LIMIT = Position.builder().x(0).y(0).build();
     @NonFinal
-    Position position;
+    DirectedPosition position;
     Position upperLimit;
 
     public void move(Movement movement) throws MovingBeyondLimitException {
-        position = DirectedPosition.completeBuilder().x(0).y(1).direction(CardinalDirection.NORTH).build();
+
+        if (movement.equals(Movement.MOVE)) {
+            position = position.move();
+        } else {
+            // position.changeDirection();
+        }
 
         if (position.biggerThen(upperLimit)) {
+            throw new MovingBeyondLimitException();
+        }
+
+        if (position.lesserThen(LOWER_LIMIT)) {
             throw new MovingBeyondLimitException();
         }
     }

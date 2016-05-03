@@ -17,4 +17,30 @@ public class DirectedPosition extends Position {
         super(x, y);
         this.direction = direction;
     }
+
+    public DirectedPosition move() {
+
+        if (direction.isXDirection()) {
+            return moveX();
+        } else {
+            return moveY();
+        }
+
+    }
+
+    private DirectedPosition moveY() {
+        if (direction.isPositiveDirection()) {
+            return DirectedPosition.completeBuilder().x(this.x).y(this.y + 1).direction(this.direction).build();
+        } else {
+            return DirectedPosition.completeBuilder().x(this.x).y(this.y - 1).direction(this.direction).build();
+        }
+    }
+
+    private DirectedPosition moveX() {
+        if (direction.isPositiveDirection()) {
+            return DirectedPosition.completeBuilder().x(this.x + 1).y(this.y).direction(this.direction).build();
+        } else {
+            return DirectedPosition.completeBuilder().x(this.x - 1).y(this.y).direction(this.direction).build();
+        }
+    }
 }

@@ -3,7 +3,8 @@ package br.com.kauedb.mars_explorer.domain;
 import br.com.kauedb.mars_explorer.infrastructure.exception.MovingBeyondLimitException;
 import mockit.Injectable;
 import mockit.Tested;
-import org.junit.Test;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import static mockit.Deencapsulation.setField;
 import static org.hamcrest.CoreMatchers.is;
@@ -18,7 +19,7 @@ public class ProbeMoveTest {
     private Probe probe;
 
     @Injectable
-    private Position position;
+    private DirectedPosition position;
 
     @Injectable
     private Position upperLimit;
@@ -34,14 +35,24 @@ public class ProbeMoveTest {
         assertThat(probe.getPosition(), is(DirectedPosition.completeBuilder().x(0).y(1).direction(CardinalDirection.NORTH).build()));
     }
 
+    @DataProvider
+    public Object[][] directions() {
+        return new Object[][]{
+                {CardinalDirection.NORTH},
+                {CardinalDirection.SOUTH},
+                {CardinalDirection.EAST},
+                {CardinalDirection.WEST},
+        };
+    }
 
-    @Test(expected = MovingBeyondLimitException.class)
-    public void shouldNotMoveBeyondUpperLimit() throws Throwable {
-        final Position initialPosition = DirectedPosition.completeBuilder().x(0).y(1).direction(CardinalDirection.NORTH).build();
+    @Test(expectedExceptions = MovingBeyondLimitException.class, dataProvider = "directions")
+    public void shouldNotMoveBeyondLimit(Direction direction) throws Throwable {
+        final Position initialPosition = DirectedPosition.completeBuilder().x(0).y(0).direction(direction).build();
         setField(probe, "position", initialPosition);
         final Position upperLimit = Position.builder().x(0).y(0).build();
         setField(probe, "upperLimit", upperLimit);
 
         probe.move(Movement.MOVE);
     }
+
 }
