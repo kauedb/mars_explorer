@@ -55,4 +55,26 @@ public class ProbeMoveTest {
         probe.move(Movement.MOVE);
     }
 
+    @Test
+    public void shouldChangeDirectionToLeft() throws Throwable {
+        final Position initialPosition = DirectedPosition.completeBuilder().x(0).y(0).direction(CardinalDirection.NORTH).build();
+        setField(probe, "position", initialPosition);
+        final Position upperLimit = Position.builder().x(0).y(0).build();
+        setField(probe, "upperLimit", upperLimit);
+
+        probe.move(Movement.LEFT);
+        assertThat(probe.getPosition(), is(DirectedPosition.completeBuilder().x(0).y(0).direction(CardinalDirection.WEST).build()));
+    }
+
+    @Test
+    public void shouldChangeDirectionToRight() throws Throwable {
+        final Position initialPosition = DirectedPosition.completeBuilder().x(0).y(0).direction(CardinalDirection.NORTH).build();
+        setField(probe, "position", initialPosition);
+        final Position upperLimit = Position.builder().x(0).y(0).build();
+        setField(probe, "upperLimit", upperLimit);
+
+        probe.move(Movement.RIGHT);
+        assertThat(probe.getPosition(), is(DirectedPosition.completeBuilder().x(0).y(0).direction(CardinalDirection.EAST).build()));
+    }
+
 }

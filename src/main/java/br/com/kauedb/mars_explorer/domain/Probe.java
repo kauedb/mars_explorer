@@ -21,7 +21,7 @@ public class Probe {
         if (movement.equals(Movement.MOVE)) {
             position = position.move();
         } else {
-            // position.changeDirection();
+            position = position.changeDirection(movement);
         }
 
         if (position.biggerThen(upperLimit)) {

@@ -22,6 +22,7 @@ public class Position {
     }
 
     public boolean lesserThen(Position limit) {
-        return !biggerThen(limit);
+        return x < limit.getX() || y < limit.getY();
     }
+
 }
