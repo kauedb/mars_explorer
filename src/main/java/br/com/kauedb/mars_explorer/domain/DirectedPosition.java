@@ -21,40 +21,22 @@ public class DirectedPosition extends Position {
     }
 
     public DirectedPosition move() {
-
-        if (direction.isXDirection()) {
-            return moveX();
-        } else {
-            return moveY();
-        }
-
+        final DirectedPosition newPosition = direction.isXDirection() ? moveX() : moveY();
+        return newPosition;
     }
 
     private DirectedPosition moveY() {
-        if (direction.isPositiveDirection()) {
-            return DirectedPosition.completeBuilder().x(this.x).y(this.y + 1).direction(this.direction).build();
-        } else {
-            return DirectedPosition.completeBuilder().x(this.x).y(this.y - 1).direction(this.direction).build();
-        }
+        final Integer newY = direction.isPositiveDirection() ? this.y + 1 : this.y - 1;
+        return DirectedPosition.completeBuilder().x(this.x).y(newY).direction(this.direction).build();
     }
 
     private DirectedPosition moveX() {
-        if (direction.isPositiveDirection()) {
-            return DirectedPosition.completeBuilder().x(this.x + 1).y(this.y).direction(this.direction).build();
-        } else {
-            return DirectedPosition.completeBuilder().x(this.x - 1).y(this.y).direction(this.direction).build();
-        }
+        final Integer newX = direction.isPositiveDirection() ? this.x + 1 : this.x - 1;
+        return DirectedPosition.completeBuilder().x(newX).y(this.y).direction(this.direction).build();
     }
 
     public DirectedPosition changeDirection(Movement movement) {
-        final Direction newDirection;
-        if (Movement.LEFT.equals(movement)) {
-            newDirection = this.direction.getLeft();
-        } else if (Movement.RIGHT.equals(movement)) {
-            newDirection = this.direction.getRight();
-        } else {
-            newDirection = this.direction; // don't move
-        }
+        final Direction newDirection = this.direction.turn(movement);
         return DirectedPosition.completeBuilder().x(this.x).y(this.y).direction(newDirection).build();
     }
 }

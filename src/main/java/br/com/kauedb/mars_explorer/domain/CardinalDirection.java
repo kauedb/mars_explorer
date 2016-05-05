@@ -45,13 +45,8 @@ public enum CardinalDirection implements Direction {
     }
 
     @Override
-    public Direction getLeft() {
-        return DIRECTION_MAP.get(this).get(Movement.LEFT);
-    }
-
-    @Override
-    public Direction getRight() {
-        return DIRECTION_MAP.get(this).get(Movement.RIGHT);
+    public Direction turn(Movement movement) {
+        return DIRECTION_MAP.get(this).get(movement);
     }
 
     @Override

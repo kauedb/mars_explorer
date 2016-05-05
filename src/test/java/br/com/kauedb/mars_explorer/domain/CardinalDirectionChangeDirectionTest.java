@@ -23,7 +23,7 @@ public class CardinalDirectionChangeDirectionTest {
 
     @Test(dataProvider = "directionAndLeft")
     public void shouldGetLeftDirection(Direction direction, Direction left) {
-        assertThat(direction.getLeft(), is(left));
+        assertThat(direction.turn(Movement.LEFT), is(left));
     }
 
     @DataProvider
@@ -38,7 +38,7 @@ public class CardinalDirectionChangeDirectionTest {
 
     @Test(dataProvider = "directionAndRight")
     public void shouldGetRightDirection(Direction direction, Direction right) {
-        assertThat(direction.getRight(), is(right));
+        assertThat(direction.turn(Movement.RIGHT), is(right));
     }
 
 }
