@@ -2,22 +2,25 @@ package br.com.kauedb.mars_explorer.application;
 
 import br.com.kauedb.mars_explorer.domain.*;
 import br.com.kauedb.mars_explorer.infrastructure.exception.MovingBeyondLimitException;
+import br.com.kauedb.mars_explorer.infrastructure.repository.ProbeRepository;
 import lombok.Builder;
 import lombok.Value;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
  */
 public class ProbeApplication {
 
-    private static final Map<Integer, Probe> PROBES = new HashMap<>();
+    private final ProbeRepository probeRepository;
+
+    public ProbeApplication(final ProbeRepository probeRepository) {
+        this.probeRepository = probeRepository;
+    }
+
 
     public CurrentPosition commandProbe(Command command) throws MovingBeyondLimitException {
 
-        Probe probe = PROBES.get(command.getProbeId());
+        Probe probe = probeRepository.find(command.getProbeId());
 
         if (probe == null) {
             probe = Probe.builder()
@@ -30,7 +33,7 @@ public class ProbeApplication {
                             .direction(CardinalDirection.getByAlias(command.getDirection()))
                             .build())
                     .build();
-            PROBES.put(command.getProbeId(), probe);
+            probeRepository.save(command.getProbeId(), probe);
         }
 
         for (char m : command.getMovements().toCharArray()) {
