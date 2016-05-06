@@ -1,6 +1,7 @@
 package br.com.kauedb.mars_explorer.domain;
 
 import br.com.kauedb.mars_explorer.infrastructure.exception.MovingBeyondLimitException;
+import lombok.Builder;
 import lombok.Value;
 import lombok.experimental.NonFinal;
 import lombok.extern.java.Log;
@@ -10,6 +11,7 @@ import lombok.extern.java.Log;
  */
 @Value
 @Log
+@Builder
 public class Probe {
     static Position LOWER_LIMIT = Position.builder().x(0).y(0).build();
     @NonFinal

@@ -14,6 +14,7 @@ public enum CardinalDirection implements Direction {
     WEST("W"),;
 
     private final static Map<Direction, Map<Movement, Direction>> DIRECTION_MAP = new HashMap<>();
+    private static final Map<String, Direction> DIRECTION_COMMANDS = new HashMap<>();
 
     static {
         DIRECTION_MAP.put(CardinalDirection.NORTH, new HashMap<Movement, Direction>() {{
@@ -34,12 +35,23 @@ public enum CardinalDirection implements Direction {
         }});
     }
 
+    static {
+        for (CardinalDirection direction : CardinalDirection.values()) {
+            DIRECTION_COMMANDS.put(direction.getAlias(), direction);
+        }
+    }
+
     private final String alias;
 
     CardinalDirection(String alias) {
         this.alias = alias;
     }
 
+    public static Direction getByAlias(final String alias) {
+        return DIRECTION_COMMANDS.get(alias);
+    }
+
+    @Override
     public String getAlias() {
         return alias;
     }
