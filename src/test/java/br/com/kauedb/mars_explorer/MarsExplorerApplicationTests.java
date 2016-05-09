@@ -1,15 +1,9 @@
 package br.com.kauedb.mars_explorer;
 
+import br.com.kauedb.mars_explorer.test.IntegrationTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MarsExplorerApplication.class)
-@WebAppConfiguration
-public class MarsExplorerApplicationTests {
+public class MarsExplorerApplicationTests extends IntegrationTest {
 
     @Test
     public void contextLoads() {

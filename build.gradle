@@ -43,6 +43,7 @@ dependencies {
     testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
     testCompile('org.jmockit:jmockit:1.23')
     testCompile('org.testng:testng:6.9.10')
+    testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
 }
 
 
@@ -51,4 +52,12 @@ eclipse {
         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
     }
+}
+
+test {
+    useTestNG()
+}
+
+task integrationTest(type: Test) {
+
 }
